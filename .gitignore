@@ -1,8 +1,7 @@
 .gitignore
- Images/b*
+ Images/bacteria.jpg
  Images/d*
  Images/p*
-
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
