@@ -158,7 +158,7 @@ function buildCharts(sample) {
             yaxis: { zeroline:false, showticklabels:false, showgrid: false, range: [-1, 1]}
         };
 
-        Plotly.newPlot('gauge', gaugeData, gaugeLayout, {showSendToCloud:true});
+        Plotly.newPlot('gauge', gaugeData, gaugeLayout);
     // -------- GAUGE CHART -------------------------------------
 
     // -------- BUBBLE CHART -------------------------------------
