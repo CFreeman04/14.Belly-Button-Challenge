@@ -87,13 +87,19 @@ function buildCharts(sample) {
         Plotly.newPlot("bar", barData, barLayout);
     // -------- BAR CHART -------------------------------------
 
-    // -------- GAUGE CHART (combination scatter and Pie chart -------------------------------------
+    // -------- GAUGE CHART (combination scatter and Pie chart)-
         // Trig to calc meter point
         var degrees = 180 - wfreq * 20,
             radius = .5;
         var radians = degrees * Math.PI / 180;
         var x = radius * Math.cos(radians);
         var y = radius * Math.sin(radians);
+
+        console.log("x:", x);
+        console.log("y:", y);
+        console.log("r:", radius);
+        console.log("radians:", radians);
+        console.log("d:", degrees);
 
         // Path: may have to change to create a better triangle
         var mainPath = 'M -.0 -0.025 L .0 0.025 L ',
@@ -103,7 +109,7 @@ function buildCharts(sample) {
             pathEnd = ' Z';
         var path = mainPath.concat(pathX, space, pathY, pathEnd);
 
-        var gaugeData = [{ 
+        var scatterData = { 
             // Scatter plot to display dot @ "origin"
             type: 'scatter',
             x: [0], 
@@ -115,8 +121,9 @@ function buildCharts(sample) {
             showlegend: false,
             text: wfreq,
             hoverinfo: 'text'
-        },
-        { 
+        };
+
+        var pieData = { 
             // Pie chart created to imitate Gauge chart
             values: [50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50],
             rotation: 90,
@@ -133,7 +140,9 @@ function buildCharts(sample) {
             type: 'pie',
             hoverinfo: 'text',
             showlegend: false
-        }];
+        };
+
+        var gaugeData = [scatterData, pieData];
 
         var gaugeLayout = {
             // Needle
@@ -144,8 +153,7 @@ function buildCharts(sample) {
                 line: { color: '850000' }
             }],
             title: '<b>Belly Button Washing Frequency</b> <br> Scrubs per Week',
-            height: 500,
-            width: 500,
+            height: 500, width: 500,
             xaxis: { zeroline:false, showticklabels:false, showgrid: false, range: [-1, 1]},
             yaxis: { zeroline:false, showticklabels:false, showgrid: false, range: [-1, 1]}
         };
