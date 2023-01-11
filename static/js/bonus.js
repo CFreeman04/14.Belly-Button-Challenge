@@ -95,25 +95,28 @@ function buildCharts(sample) {
         var x = radius * Math.cos(radians);
         var y = radius * Math.sin(radians);
 
-        console.log("x:", x);
-        console.log("y:", y);
-        console.log("r:", radius);
-        console.log("radians:", radians);
-        console.log("d:", degrees);
-
         // Path: may have to change to create a better triangle
-        var mainPath = 'M -.0 -0.025 L .0 0.025 L ',
-            pathX = String(x),
-            space = ' ',
-            pathY = String(y),
-            pathEnd = ' Z';
-        var path = mainPath.concat(pathX, space, pathY, pathEnd);
+        // var mainPath = 'M -.0 -0.025 L .0 0.025 L ',
+        //     pathX = String(x),
+        //     space = ' ',
+        //     pathY = String(y),
+        //     pathEnd = ' Z';
+        // var path = mainPath.concat(pathX, space, pathY, pathEnd);
+
+        // Path to create consistent triangle regardless of wfreq
+        // Format: "M 0 0.025 L 0 -0.025 L 0.5 0 Z"
+        var mainPath = 'M ',
+            pathX1 = -1 * Math.sin(radians) * .025,
+            pathY1 = Math.cos(radians) * .025,
+            pathX2 = -1 * pathX1,
+            pathY2 = -1 * pathY1; 
+
+        var path = mainPath.concat(pathX1, ' ', pathY1, ' L ', pathX2, ' ', pathY2, ' L ', String(x), ' ', String(y), ' Z'); 
 
         var scatterData = { 
             // Scatter plot to display dot @ "origin"
             type: 'scatter',
-            x: [0], 
-            y: [0],
+            x: [0], y: [0],
             marker: {
                 size: 28, 
                 color:'850000',
