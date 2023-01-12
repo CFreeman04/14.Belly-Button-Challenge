@@ -3,8 +3,8 @@ function init() {
     var selector = d3.select("#selDataset");
 
     // Read from URL or JSON file
-    d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then((data) => {
-    // d3.json("data/samples.json").then((data) => {
+    // d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then((data) => {
+    d3.json("data/samples.json").then((data) => {
         var sampleNames = data.names;
 
         // Populate names for selector
@@ -70,14 +70,17 @@ function buildCharts(sample) {
 
     // -------- BAR CHART -------------------------------------
         // Create y labels with "OTU" preceding otu_id ie. OTU 1167
-        var yticks = otu_ids.slice(0,10).map(outId => `OTU ${outId}`).reverse();
+        // var yticks = otu_ids.slice(0,10).map(outId => `OTU ${outId}`).reverse();
+
+        console.log(sampleArray[0]);
+        console.log("otu",otu_labels);
 
         var barData = [{
             x: sample_values.slice(0,10).reverse(),
-            y: yticks,
+            y: otu_ids.slice(0,10).map(outId => `OTU ${outId}`).reverse(),
             type: "bar",
             orientation: "h",
-            text: otu_labels.slice(0,10),
+            text: otu_labels.slice(0,10).reverse(),
         }];
 
         var barLayout = {
